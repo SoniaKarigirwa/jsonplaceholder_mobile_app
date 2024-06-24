@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, FlatList, Image, TouchableOpacity, Alert } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  Image,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
-import { getPostById, getCommentsByPostId, deletePostById } from "../../lib/jsonplaceholder";
+import {
+  getPostById,
+  getCommentsByPostId,
+  deletePostById,
+} from "../../lib/jsonplaceholder";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const CommentCard = ({ name, email, body }) => (
@@ -15,7 +26,7 @@ const CommentCard = ({ name, email, body }) => (
 const Post = () => {
   const route = useRoute();
   const navigation = useNavigation();
-  const { postId } = route.params;
+  const { id } = route.params;
 
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
@@ -24,32 +35,34 @@ const Post = () => {
   useEffect(() => {
     const fetchPostData = async () => {
       try {
-        if (!postId) {
-          throw new Error('Post ID is undefined');
+        if (!id) {
+          throw new Error("Post ID is undefined");
         }
-        const fetchedPost = await getPostById(postId);
-        const fetchedComments = await getCommentsByPostId(postId);
+        const fetchedPost = await getPostById(id);
+        const fetchedComments = await getCommentsByPostId(id);
         setPost(fetchedPost);
         setComments(fetchedComments);
       } catch (error) {
-        console.error('Error fetching post data:', error);
+        console.error("Error fetching post data:", error);
       } finally {
         setLoading(false);
       }
     };
-  
+
     fetchPostData();
-  }, [postId]);
-  
+  }, [id]);
 
   const onDeletePost = async () => {
     try {
-      await deletePostById(postId);
-      Alert.alert("Post Deleted", "The post has been successfully deleted.");
-      navigation.goBack(); // Go back after deletion
+      if (await deletePostById(id)) {
+        Alert.alert("Post Deleted");
+        navigation.goBack(); // Go back after deletion
+      } else {
+        Alert.alert("Failed to delete post");
+      }
     } catch (error) {
       console.error("Error deleting post:", error);
-      Alert.alert("Error", "Failed to delete the post. Please try again.");
+      // Alert.alert("Error", "Failed to delete the post. Please try again.");
     }
   };
 
@@ -82,7 +95,9 @@ const Post = () => {
             Comments
           </Text>
           <TouchableOpacity onPress={onDeletePost}>
-            <Text className="text-base text-red-500 font-psemibold">Delete</Text>
+            <Text className="text-base text-red-500 font-psemibold">
+              Delete
+            </Text>
           </TouchableOpacity>
         </View>
 
@@ -90,11 +105,7 @@ const Post = () => {
           data={comments}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
-            <CommentCard
-              name={item.name}
-              email={item.email}
-              body={item.body}
-            />
+            <CommentCard name={item.name} email={item.email} body={item.body} />
           )}
         />
       </View>
