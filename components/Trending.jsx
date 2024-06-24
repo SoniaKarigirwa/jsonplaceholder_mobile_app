@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ResizeMode, Video } from "expo-av";
+import { ResizeMode, Post } from "expo-av";
 import * as Animatable from "react-native-animatable";
 import {
   FlatList,
@@ -38,8 +38,8 @@ const TrendingItem = ({ activeItem, item }) => {
       duration={500}
     >
       {play ? (
-        <Video
-          source={{ uri: item.video }}
+        <Post
+          source={{ uri: item.post }}
           className="w-52 h-72 rounded-[33px] mt-3 bg-white/10"
           resizeMode={ResizeMode.CONTAIN}
           useNativeControls

@@ -77,9 +77,16 @@ const Post = () => {
   return (
     <SafeAreaView className="bg-primary h-full">
       <View className="px-4 py-6">
+        <View className="mt-10 flex-row justify-between items-center">
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text className="text-sm text-secondary font-psemibold">Back</Text>
-        </TouchableOpacity>
+            <Text className="text-sm text-secondary font-psemibold">Back</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onDeletePost}>
+            <Text className="text-base text-red-500 font-psemibold">
+              Delete
+            </Text>
+          </TouchableOpacity>
+        </View>
 
         {post && (
           <View className="mt-6">
@@ -90,16 +97,9 @@ const Post = () => {
           </View>
         )}
 
-        <View className="mt-10 flex-row justify-between items-center">
-          <Text className="text-lg font-psemibold text-white mb-4">
-            Comments
-          </Text>
-          <TouchableOpacity onPress={onDeletePost}>
-            <Text className="text-base text-red-500 font-psemibold">
-              Delete
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <Text className="text-lg font-psemibold text-white mb-4 mt-4">
+          Comments
+        </Text>
 
         <FlatList
           data={comments}

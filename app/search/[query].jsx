@@ -24,7 +24,7 @@ const Search = () => {
           <PostCard
             title={item.title}
             thumbnail={item.thumbnail}
-            video={item.video}
+            post={item.post}
             creator={item.creator.username}
             avatar={item.creator.avatar}
           />
@@ -47,8 +47,8 @@ const Search = () => {
         )}
         ListEmptyComponent={() => (
           <EmptyState
-            title="No Videos Found"
-            subtitle="No videos found for this search query"
+            title="No Posts Found"
+            subtitle="No posts found for this search query"
           />
         )}
       />

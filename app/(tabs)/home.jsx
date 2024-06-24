@@ -51,9 +51,7 @@ const Home = () => {
             <Text className="font-pmedium text-sm text-gray-100">
               Welcome Back
             </Text>
-            <Text className="text-2xl font-psemibold text-white">
-              JSMastery
-            </Text>
+            <Text className="text-2xl font-psemibold text-white">Sonia K</Text>
           </View>
 
           <View className="mt-1.5">

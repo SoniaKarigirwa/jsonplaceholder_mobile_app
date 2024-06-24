@@ -23,6 +23,16 @@ const SignUp = () => {
       return;
     }
 
+    if (!isValidEmail(form.email)) {
+      Alert.alert("Error", "Please enter a valid email address");
+      return;
+    }
+
+    if (form.password.length < 6) {
+      Alert.alert("Error", "Password should be at least 6 characters long");
+      return;
+    }
+
     setSubmitting(true);
     try {
       const userData = {
@@ -50,6 +60,12 @@ const SignUp = () => {
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const isValidEmail = (email) => {
+    // Simple email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
 
   return (
