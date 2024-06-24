@@ -14,11 +14,11 @@ const SignUp = () => {
   const [form, setForm] = useState({
     username: "",
     email: "",
-    password: "",
+    // password: "",
   });
 
   const submit = async () => {
-    if (form.username === "" || form.email === "" || form.password === "") {
+    if (form.username === "" || form.email === "") {
       Alert.alert("Error", "Please fill in all fields");
       return;
     }
@@ -28,17 +28,17 @@ const SignUp = () => {
       return;
     }
 
-    if (form.password.length < 6) {
-      Alert.alert("Error", "Password should be at least 6 characters long");
-      return;
-    }
+    // if (form.password.length < 6) {
+    //   Alert.alert("Error", "Password should be at least 6 characters long");
+    //   return;
+    // }
 
     setSubmitting(true);
     try {
       const userData = {
         username: form.username,
         email: form.email,
-        password: form.password,
+        // password: form.password,
       };
       const result = await createUser(userData);
 
@@ -47,7 +47,7 @@ const SignUp = () => {
         id: result.id,
         username: result.username,
         email: result.email,
-        password: form.password, // Store the password in the state for now
+        // password: form.password, // Store the password in the state for now
       };
 
       setUser(mappedUser);
@@ -102,13 +102,13 @@ const SignUp = () => {
             keyboardType="email-address"
           />
 
-          <FormField
+          {/* <FormField
             title="Password"
             value={form.password}
             handleChangeText={(e) => setForm({ ...form, password: e })}
             otherStyles="mt-7"
             secureTextEntry
-          />
+          /> */}
 
           <CustomButton
             title="Sign Up"

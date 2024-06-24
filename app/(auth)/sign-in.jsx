@@ -13,11 +13,11 @@ const SignIn = () => {
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     email: "",
-    password: "",
+    // password: "",
   });
 
   const submit = async () => {
-    if (form.email === "" || form.password === "") {
+    if (form.email === "") {
       Alert.alert("Error", "Please fill in all fields");
       return;
     }
@@ -35,7 +35,7 @@ const SignIn = () => {
           id: result.id,
           username: result.username,
           email: result.email,
-          password: form.password,
+          // password: form.password,
         };
 
         setUser(mappedUser);
@@ -80,13 +80,13 @@ const SignIn = () => {
             keyboardType="email-address"
           />
 
-          <FormField
+          {/* <FormField
             title="Password"
             value={form.password}
             handleChangeText={(e) => setForm({ ...form, password: e })}
             otherStyles="mt-7"
             secureTextEntry
-          />
+          /> */}
 
           <CustomButton
             title="Sign In"

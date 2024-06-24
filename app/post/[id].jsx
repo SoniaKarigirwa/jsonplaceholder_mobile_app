@@ -97,7 +97,7 @@ const Post = () => {
           </View>
         )}
 
-        <Text className="text-lg font-psemibold text-white mb-4 mt-4">
+        <Text className="text-lg font-psemibold text-secondary mb-4 mt-4">
           Comments
         </Text>
 

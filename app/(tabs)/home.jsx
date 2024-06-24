@@ -4,12 +4,11 @@ import { FlatList, Image, RefreshControl, Text, View } from "react-native";
 
 import { images } from "../../constants";
 import useJsonPlaceholder from "../../lib/useJsonPlaceHolder";
-import { getAllPosts, getLatestPosts } from "../../lib/jsonplaceholder";
+import { getAllPosts } from "../../lib/jsonplaceholder";
 import { EmptyState, SearchInput, Trending, PostCard } from "../../components";
 
 const Home = () => {
   const { data: posts, refetch } = useJsonPlaceholder(getAllPosts);
-  const { data: latestPosts } = useJsonPlaceholder(getLatestPosts);
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -70,11 +69,11 @@ const Home = () => {
             Latest Posts
           </Text>
 
-          <Trending posts={latestPosts ?? []} />
+          <Trending posts={[]} />
         </View>
       </View>
     ),
-    [latestPosts]
+    []
   );
 
   const listEmptyComponent = useMemo(

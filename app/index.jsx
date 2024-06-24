@@ -6,13 +6,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../constants";
 import { CustomButton, Loader } from "../components";
 import { useGlobalContext } from "../context/GlobalProvider";
+import { ActivityIndicator } from "react-native-web";
+import { useEffect } from "react";
+import { isLoading } from "expo-font";
 
 const Welcome = () => {
-  const { loading, isLogged } = useGlobalContext();
-  console.log("Loading:", loading);
-  console.log("Is Logged:", isLogged);
+  // if (!loading && isLogged) return <Redirect href="/home" />;
 
-  if (!loading && isLogged) return <Redirect href="/home" />;
+  <ActivityIndicator/>
+  const { loading, isLogged, login } = useGlobalContext();
 
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -51,7 +53,7 @@ const Welcome = () => {
           </View>
 
           <Text className="text-sm font-pregular text-gray-100 mt-7 text-center">
-            Where Creativity Meets Innovation: Embark on a Journey of Limitless
+            Embark on a Journey of Limitless
             Exploration with Aora
           </Text>
 
